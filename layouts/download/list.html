@@ -1,0 +1,132 @@
+{{ define "title" }}下载 · {{ site.Title }}{{ end }}
+
+{{/*
+  下载页 · 三 tab 切换 (Android / iOS / HarmonyOS)
+  数据来源：内容通过 Data Template 从 .Site.Data.releases 获取（本期硬编码在此 layout，简化流程）
+  APK 直链约定：https://github.com/{owner}/{repo}/releases/download/{version}/WhiplashMaster-{version}-KMM-release.apk
+*/}}
+
+{{ define "main" }}
+{{- $owner := .Site.Params.githubOwner -}}
+{{- $repo  := .Site.Params.githubRepo -}}
+{{- $latest := .Site.Params.latestVersion -}}
+{{- $latestDate := .Site.Params.latestVersionDate -}}
+{{- $releasesBase := printf "https://github.com/%s/%s/releases/download" $owner $repo -}}
+{{- $latestApkURL := printf "%s/%s/WhiplashMaster-%s-KMM-release.apk" $releasesBase $latest $latest -}}
+
+<section class="container" style="padding: 64px 24px 32px;">
+  <header style="margin-bottom: 40px;">
+    <div style="font-family: var(--font-mono); font-size: 12px; color: var(--brand); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;">DOWNLOAD</div>
+    <h1 style="font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px;">下载安装</h1>
+    <p style="font-size: 17px; color: var(--fg-muted); line-height: 1.6; max-width: 620px;">
+      当前最新版本 <span class="mono" style="color: var(--fg);">{{ $latest }}</span> · 发布日期 {{ $latestDate }}
+    </p>
+  </header>
+
+  {{/* Tab 切换 */}}
+  <div class="download-tabs" role="tablist">
+    <button class="download-tab" data-download-tab="android" role="tab">Android</button>
+    <button class="download-tab" data-download-tab="ios" role="tab">iOS</button>
+    <button class="download-tab" data-download-tab="harmonyos" role="tab">HarmonyOS</button>
+  </div>
+
+  {{/* Android Panel */}}
+  <div class="download-panel" data-download-panel="android">
+    <div class="download-hero">
+      <div class="download-hero__title">Android {{ $latest }}</div>
+      <p class="download-hero__desc">直装 APK · 需 Android 7.0+ · ARM64 架构 · 约 25 MB</p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a class="btn btn--primary btn--lg" href="{{ $latestApkURL }}" download>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          下载最新版 APK
+        </a>
+        <a class="btn btn--ghost btn--lg" href="{{ printf "https://github.com/%s/%s/releases" $owner $repo }}" target="_blank" rel="noopener">GitHub Releases</a>
+      </div>
+    </div>
+
+    <div class="download-notice">
+      <strong>安装提示：</strong>
+      安装时系统可能提示「未知来源应用」，这是 Android 对直装 APK 的标准安全提示，允许即可。若安装失败，请参阅
+      <a href="#install-guide" style="color: var(--brand); text-decoration: underline;">安装指南</a>。
+    </div>
+
+    <h3 style="font-size: 18px; margin: 40px 0 16px; font-family: var(--font-mono);">历史版本</h3>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th style="width: 120px;">版本</th>
+          <th style="width: 120px;">发布日期</th>
+          <th>说明</th>
+          <th style="width: 100px; text-align: right;">下载</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{- range where site.RegularPages "Section" "changelog" }}
+          {{- $v := .Params.version | default .Title -}}
+          <tr>
+            <td class="mono">{{ $v }}</td>
+            <td class="mono" style="color: var(--fg-subtle);">{{ .Date.Format "2006-01-02" }}</td>
+            <td style="color: var(--fg-muted);">{{ .Params.summary | default "" }}</td>
+            <td style="text-align: right;">
+              {{- if .Params.apkURL }}
+                <a href="{{ .Params.apkURL }}" download style="color: var(--brand);">APK</a>
+              {{- else }}
+                <a href="{{ printf "%s/%s/WhiplashMaster-%s-KMM-release.apk" $releasesBase $v $v }}" download style="color: var(--brand);">APK</a>
+              {{- end }}
+            </td>
+          </tr>
+        {{- end }}
+      </tbody>
+    </table>
+
+    <div id="install-guide" style="margin-top: 48px;">
+      <h3 style="font-size: 18px; margin-bottom: 16px;">安装指南</h3>
+      <div class="prose">
+        <ol>
+          <li>点击「下载最新版 APK」按钮，浏览器会将 APK 文件保存到「下载」文件夹。</li>
+          <li>打开文件管理器，找到 <code>WhiplashMaster-{{ $latest }}-KMM-release.apk</code>，点击安装。</li>
+          <li>若系统提示「安装未知应用受限」，进入 <strong>设置 → 应用与权限 → 特殊权限 → 安装未知应用</strong>，允许当前浏览器/文件管理器安装。</li>
+          <li>安装完成后，首次启动时会请求麦克风权限，务必允许（App 只在本地处理音频，不上传）。</li>
+        </ol>
+        <p>OEM 特殊问题（小米 / 荣耀 / vivo 拦截）：请查看 <a href="{{ "/about/manual/" | relURL }}">使用手册</a> 中的适配说明。</p>
+      </div>
+    </div>
+  </div>
+
+  {{/* iOS Panel */}}
+  <div class="download-panel" data-download-panel="ios">
+    <div class="download-hero">
+      <div class="download-hero__title">iOS · 内测中</div>
+      <p class="download-hero__desc">App Store 上架审核准备中。当前通过 TestFlight 邀请分发。</p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a class="btn btn--primary btn--lg" href="{{ "/feedback/#wechat" | relURL }}">申请 TestFlight 内测</a>
+        <a class="btn btn--ghost btn--lg" href="{{ .Site.Params.xiaohongshu }}" target="_blank" rel="noopener">小红书私信 @Wenshy</a>
+      </div>
+    </div>
+    <div class="prose">
+      <h3>加入方式</h3>
+      <ol>
+        <li>先在 App Store 安装 <a href="https://apps.apple.com/app/testflight/id899247664" target="_blank" rel="noopener">TestFlight</a>。</li>
+        <li>通过上方渠道联系我，说明「申请 TestFlight」+ 你的 Apple ID 邮箱。</li>
+        <li>收到我发送的邀请链接后，在 iPhone 上打开，进入 TestFlight 完成安装。</li>
+      </ol>
+      <p>正式上架 App Store 后，所有 TestFlight 用户会收到自动通知，届时可切换到正式版。</p>
+    </div>
+  </div>
+
+  {{/* HarmonyOS Panel */}}
+  <div class="download-panel" data-download-panel="harmonyos">
+    <div class="download-hero">
+      <div class="download-hero__title">HarmonyOS · 开发中</div>
+      <p class="download-hero__desc">鸿蒙原生版本正在按 ArkTS 技术栈迁移，暂无可下载版本。</p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a class="btn btn--primary btn--lg" href="{{ "/roadmap/" | relURL }}">查看 Roadmap</a>
+        <a class="btn btn--ghost btn--lg" href="{{ "/feedback/" | relURL }}">投票加速</a>
+      </div>
+    </div>
+    <div class="prose">
+      <p>如果你是华为鸿蒙用户希望优先适配，欢迎在反馈页留言，我会根据投票热度调整排期。</p>
+    </div>
+  </div>
+</section>
+{{ end }}

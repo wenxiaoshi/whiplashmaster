@@ -1,0 +1,25 @@
+{{/* baseof.html · 所有页面的骨架
+
+  提供的 block：
+    - main   : 主内容区
+    - title  : <title> 值（默认站点 title）
+
+  变量约定：
+    - .Site.Params.brandColor     : 品牌主色
+    - .Site.Params.latestVersion  : 最新版本号
+*/ -}}
+<!DOCTYPE html>
+<html lang="{{ site.Language.LanguageCode }}">
+<head>
+  {{ partial "head.html" . }}
+  <title>{{ block "title" . }}{{ site.Title }}{{ end }}</title>
+</head>
+<body>
+  {{ partial "header.html" . }}
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  <script src="{{ "js/theme.js" | relURL }}" defer></script>
+</body>
+</html>

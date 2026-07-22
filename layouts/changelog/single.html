@@ -1,0 +1,59 @@
+{{ define "title" }}{{ .Params.version | default .Title }} · 更新日志 · {{ site.Title }}{{ end }}
+
+{{ define "main" }}
+<article class="changelog-single">
+  <a href="{{ "/changelog/" | relURL }}" style="font-family: var(--font-mono); font-size: 12px; color: var(--fg-subtle); letter-spacing: 0.06em; text-transform: uppercase;">← 全部更新日志</a>
+
+  <header class="changelog-single__header" style="margin-top: 20px;">
+    <div class="changelog-single__version">{{ .Params.version | default .Title }}</div>
+    <div class="changelog-single__meta">
+      <span>{{ .Date.Format "2006-01-02" }}</span>
+      {{- with .Params.channel }}<span>·</span><span class="badge badge--muted">{{ . }}</span>{{ end }}
+      {{- with .Params.versionCode }}<span>·</span><span>versionCode {{ . }}</span>{{ end }}
+    </div>
+    {{- with .Params.summary }}
+    <p style="margin-top: 16px; font-size: 17px; color: var(--fg-muted); line-height: 1.6;">{{ . }}</p>
+    {{- end }}
+  </header>
+
+  <div class="prose">
+    {{ .Content }}
+  </div>
+
+  {{/* 下载入口卡片 */}}
+  {{- if or .Params.apkURL .Params.iosNote }}
+  <div class="card" style="margin-top: 48px;">
+    <div style="font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;">下载本版本</div>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      {{- with .Params.apkURL }}
+      <a class="btn btn--primary" href="{{ . }}" download>下载 Android APK</a>
+      {{- end }}
+      {{- with .Params.iosNote }}
+      <span class="btn btn--ghost" style="cursor: default;">iOS · {{ . }}</span>
+      {{- end }}
+      <a class="btn btn--ghost" href="{{ "/download/" | relURL }}">全部安装方式</a>
+    </div>
+  </div>
+  {{- end }}
+
+  {{/* 上一版 / 下一版 */}}
+  <nav style="display: flex; justify-content: space-between; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); gap: 16px;">
+    <div>
+      {{- with .PrevInSection }}
+      <a href="{{ .RelPermalink }}" style="display: flex; flex-direction: column; gap: 4px;">
+        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle);">← 更早版本</span>
+        <span style="font-family: var(--font-mono); font-weight: 600;">{{ .Params.version | default .Title }}</span>
+      </a>
+      {{- end }}
+    </div>
+    <div style="text-align: right;">
+      {{- with .NextInSection }}
+      <a href="{{ .RelPermalink }}" style="display: flex; flex-direction: column; gap: 4px; align-items: flex-end;">
+        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle);">更新版本 →</span>
+        <span style="font-family: var(--font-mono); font-weight: 600;">{{ .Params.version | default .Title }}</span>
+      </a>
+      {{- end }}
+    </div>
+  </nav>
+</article>
+{{ end }}

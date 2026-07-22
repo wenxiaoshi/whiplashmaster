@@ -1,0 +1,31 @@
+{{/* head.html · <head> 元信息与静态资源 */ -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="{{ .Site.Params.brandColor | default "#FF6D00" }}">
+{{- with .Site.Params.description }}
+<meta name="description" content="{{ . }}">
+{{- end }}
+{{- with .Site.Params.author }}
+<meta name="author" content="{{ . }}">
+{{- end }}
+
+{{/* Open Graph */ -}}
+<meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}">
+<meta property="og:description" content="{{ .Description | default site.Params.description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta name="twitter:card" content="summary_large_image">
+
+{{/* Favicon 用 Logo；PNG 直接引用 */ -}}
+<link rel="icon" type="image/png" href="{{ "img/logo.png" | relURL }}">
+<link rel="apple-touch-icon" href="{{ "img/logo.png" | relURL }}">
+
+{{/* CSS · 通过 Hugo Pipes 处理指纹与压缩 */ -}}
+{{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
+{{/* RSS 自动发现（仅首页与 changelog 列表） */ -}}
+{{- range .AlternativeOutputFormats -}}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" title="{{ site.Title }}">
+{{- end -}}

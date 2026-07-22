@@ -1,0 +1,75 @@
+# WhiplashMaster 官网 Hugo 配置
+# 极客风独立站，不依赖任何主题，全部 layouts 自写。
+# 参考 PRD: Document/feature-app-official-website/feature-app-official-website_PRD.md
+
+baseURL      = "https://wenxiaoshi.github.io/"
+languageCode = "zh-cn"
+title        = "WhiplashMaster · 鼓手最严格的老师"
+
+# 一期只做中文，PRD §12.3 与用户拍板一致
+defaultContentLanguage = "zh-cn"
+
+# 输出配置
+[outputs]
+  home = ["HTML", "RSS"]
+
+# 分类系统（changelog 版本时间线用）
+[taxonomies]
+  tag = "tags"
+
+# Markdown 渲染
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel   = 3
+
+# 顶部导航
+[[menu.main]]
+  name   = "功能"
+  url    = "/features/"
+  weight = 10
+[[menu.main]]
+  name   = "下载"
+  url    = "/download/"
+  weight = 20
+[[menu.main]]
+  name   = "更新日志"
+  url    = "/changelog/"
+  weight = 30
+[[menu.main]]
+  name   = "Roadmap"
+  url    = "/roadmap/"
+  weight = 40
+[[menu.main]]
+  name   = "反馈"
+  url    = "/feedback/"
+  weight = 50
+[[menu.main]]
+  name   = "关于"
+  url    = "/about/"
+  weight = 60
+
+# 站点级参数（layouts 里通过 .Site.Params 访问）
+[params]
+  description = "基于实时麦克风识别 + 鼓点精准度评分的跨平台基本功练习应用"
+  author      = "Wenshy"
+  brandColor  = "#FF6D00"   # 与 App OrangeThemePrimary 一致
+  # 最新版本，发布新版时手动更新一次即可
+  latestVersion       = "v2.0.1"
+  latestVersionDate   = "2026-07-19"
+  # GitHub 组织与仓库（用于生成 Releases 链接）
+  githubOwner = "wenxiaoshi"
+  githubRepo  = "wenxiaoshi.github.io"
+  # 外部社群入口
+  xiaohongshu = "https://www.xiaohongshu.com/user/profile/67652a88000000001403254d"
+  # Tally 表单 ID（正式 ID 需在 Tally 后台创建后替换）
+  tallyFormId = "mYourFormId"
+
+[params.footer]
+  since = 2026
+
+# 站点信息构建时可用
+[params.social]
+  wechatQr = "/assets/wechat-qr.jpg"

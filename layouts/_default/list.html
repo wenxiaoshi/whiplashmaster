@@ -1,0 +1,44 @@
+{{ define "title" }}{{ .Title }} · {{ site.Title }}{{ end }}
+
+{{/*
+  通用 list layout · 用于功能、关于、Roadmap、Feedback 等 section 首页
+  当 section 的 _index.md 已经写好完整正文时直接渲染 Content；
+  然后列出所有子页链接（若有）。
+*/}}
+{{ define "main" }}
+<section class="container-narrow" style="padding: 64px 24px 32px;">
+  <header style="margin-bottom: 40px;">
+    <div style="font-family: var(--font-mono); font-size: 12px; color: var(--brand); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;">
+      {{ upper .Section }}
+    </div>
+    <h1 style="font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px;">{{ .Title }}</h1>
+    {{- with .Description }}
+    <p style="font-size: 17px; color: var(--fg-muted); line-height: 1.6;">{{ . }}</p>
+    {{- end }}
+  </header>
+
+  <div class="prose">
+    {{ .Content }}
+  </div>
+</section>
+
+{{- with .Pages }}
+<section class="container-narrow" style="padding: 32px 24px 96px;">
+  <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 20px; color: var(--fg-muted);">相关页面</h2>
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    {{- range . }}
+    <a href="{{ .RelPermalink }}" class="card card--hover" style="display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <div style="font-weight: 600; margin-bottom: 4px;">{{ .Title }}</div>
+        {{- with .Description }}
+        <div style="font-size: 13px; color: var(--fg-muted);">{{ . }}</div>
+        {{- end }}
+      </div>
+      <span style="color: var(--fg-subtle); font-family: var(--font-mono);">→</span>
+    </a>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+
+{{ end }}
