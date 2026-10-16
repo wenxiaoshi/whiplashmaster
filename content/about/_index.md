@@ -21,7 +21,7 @@ WhiplashMaster 起源于一位业余鼓手兼独立开发者的日常烦恼 — 
 
 ## 项目状态
 
-- **当前版本**：v2.0.1（2026-07-19 发布）
+- **当前版本**：v2.1.0（2026-07-30 发布）
 - **平台**：Android（已发布）· iOS（TestFlight 内测）· HarmonyOS（开发中）
 - **代码架构**：Kotlin Multiplatform (KMM) + Compose Multiplatform + Clean Architecture
 - **独立开发**：单人主责，无商业化压力，节奏取决于业余精力

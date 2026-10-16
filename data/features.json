@@ -1,0 +1,46 @@
+[
+  {
+    "id": "scored",
+    "title": "评分练习",
+    "summary": "节奏、稳定度与力度，多维反馈。",
+    "description": "通过麦克风识别击打，结合波形与节奏判定，找到可以改进的地方。练习后回看节奏、稳定度与力度表现。",
+    "path": "/features/",
+    "image": "scored.jpg",
+    "width": 1206,
+    "height": 2057,
+    "alt": "评分练习实际界面：130 BPM 录制中的鼓点波形，下方显示完美、拖拍、抢拍、漏拍和错误图例。"
+  },
+  {
+    "id": "companion",
+    "title": "节拍陪伴",
+    "summary": "跟随节拍，专注每一次击打。",
+    "description": "在陪伴模式下跟随节拍练习，查看节拍指示、小节数与练习时长。无需评分时，把注意力留给演奏。",
+    "path": "/features/companion/",
+    "image": "companion.jpg",
+    "width": 1206,
+    "height": 2459,
+    "alt": "节拍陪伴实际界面：陪伴模式、暂停圆环、四拍指示、00:56 计时和完成陪伴按钮。"
+  },
+  {
+    "id": "free-play",
+    "title": "自由演奏",
+    "summary": "自在演奏，记录有效练习时长。",
+    "description": "不设 BPM，不进行节奏评分。通过声音活动记录有效演奏时长，暂停与继续都由你掌握。",
+    "path": "/features/free-play/",
+    "image": "free-play.jpg",
+    "width": 1206,
+    "height": 2452,
+    "alt": "自由演奏实际界面：自由演奏模式、暂停圆环、00:55 有效时长和完成陪伴按钮。"
+  },
+  {
+    "id": "history",
+    "title": "练习记录",
+    "summary": "回听、复盘，看见长期积累。",
+    "description": "通过练习历史、热力图与趋势回顾长期积累，也可以回听评分练习的录音。不同练习模式保留各自适用的记录。",
+    "path": "/features/history/",
+    "image": "history.jpg",
+    "width": 1206,
+    "height": 1037,
+    "alt": "练习记录实际界面：七月至十月的练习热力图，包含从少到多的颜色图例与 Elite 档。"
+  }
+]

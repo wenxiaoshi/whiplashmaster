@@ -1,65 +1,9 @@
-{{ define "title" }}反馈 · {{ site.Title }}{{ end }}
-
 {{ define "main" }}
-<section class="container" style="padding: 64px 24px 96px;">
-  <header style="margin-bottom: 40px;">
-    <div style="font-family: var(--font-mono); font-size: 12px; color: var(--brand); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;">FEEDBACK</div>
-    <h1 style="font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px;">提交反馈</h1>
-    <p style="font-size: 17px; color: var(--fg-muted); line-height: 1.6; max-width: 620px;">
-      Bug、功能建议、体验问题，全都欢迎。选择一种方式：填表 · 小红书 · 微信。
-    </p>
-  </header>
-
-  <div class="feedback-grid">
-    <div class="feedback-form-wrap">
-      {{- $tallyId := .Site.Params.tallyFormId -}}
-      {{- if and $tallyId (ne $tallyId "mYourFormId") }}
-      {{/* Tally 表单嵌入。ID 在 Tally 后台配置好后填到 hugo.toml */}}
-      <iframe src="https://tally.so/embed/{{ $tallyId }}?alignLeft=1&transparentBackground=1&hideTitle=1" loading="lazy" title="WhiplashMaster 反馈表单"></iframe>
-      {{- else }}
-      <div class="prose">
-        <p style="color: var(--fg-muted);">
-          Tally 反馈表单正在配置中。在表单上线前，请通过右侧方式联系我，反馈时请附上：
-        </p>
-        <ul>
-          <li><strong>反馈类型</strong>：Bug / 功能建议 / 体验问题 / 其他</li>
-          <li><strong>App 版本</strong>：设置页最底部可查看</li>
-          <li><strong>设备机型</strong>：如 Pixel 9 / iPhone 15</li>
-          <li><strong>问题描述</strong>：能复现的具体步骤最佳</li>
-          <li><strong>截图/录屏</strong>：可选，但有的话很加分</li>
-        </ul>
-        <p style="color: var(--fg-muted);">
-          Bug 类通常 1-3 天内回复；功能建议会进入 <a href="{{ "/roadmap/" | relURL }}">Roadmap</a> 排期评估。
-        </p>
-      </div>
-      {{- end }}
-    </div>
-
-    <aside class="feedback-sidebar">
-      <div class="contact-card">
-        <div class="contact-card__label">Xiaohongshu</div>
-        <div class="contact-card__title">小红书 @Wenshy</div>
-        <p class="contact-card__desc">评论区 / 私信都会看，回复时间以更新帖为准。</p>
-        <a class="btn btn--ghost btn--sm" href="{{ .Site.Params.xiaohongshu }}" target="_blank" rel="noopener">打开小红书 →</a>
-      </div>
-
-      <div class="contact-card" id="wechat">
-        <div class="contact-card__label">WeChat</div>
-        <div class="contact-card__title">加我个人微信</div>
-        <p class="contact-card__desc">扫码添加，验证信息请填「WhiplashMaster」。适合内测邀请、TestFlight 申请、紧急 Bug。</p>
-        <img src="{{ "assets/wechat-qr.jpg" | relURL }}" alt="Wenshy 个人微信二维码" loading="lazy">
-      </div>
-
-      <div class="contact-card">
-        <div class="contact-card__label">Feedback SLA</div>
-        <div class="contact-card__title">反馈处理约定</div>
-        <ul style="font-size: 13px; color: var(--fg-muted); line-height: 1.8; padding-left: 18px; margin-top: 8px;">
-          <li>Bug 类：1-3 天内回复</li>
-          <li>功能建议：会进入 Roadmap 排期</li>
-          <li>紧急问题：微信最快</li>
-        </ul>
-      </div>
-    </aside>
+<section class="article wrap narrow">
+  <div class="article-heading"><p class="eyebrow">FEEDBACK</p><h1>联系与反馈</h1><p>反馈时请附上 App 版本、设备型号和问题描述。</p></div>
+  <div class="contact-grid">
+    <article class="contact-card"><h2>小红书</h2><p>通过评论或私信反馈使用体验。</p><a class="text-link" href="{{ site.Params.xiaohongshu }}" target="_blank" rel="noopener noreferrer">打开小红书 ↗</a></article>
+    <article class="contact-card" id="wechat"><h2>微信</h2><p>扫码添加，备注「WhiplashMaster」。</p><img src="{{ "assets/wechat-qr.jpg" | strings.TrimPrefix "/" | relURL }}" width="220" height="220" alt="Wenshy 微信联系二维码" loading="lazy"></article>
   </div>
 </section>
 {{ end }}

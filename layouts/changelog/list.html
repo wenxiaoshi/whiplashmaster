@@ -1,43 +1,15 @@
-{{ define "title" }}更新日志 · {{ site.Title }}{{ end }}
-
 {{ define "main" }}
-<section class="container" style="padding: 64px 24px 32px;">
-  <header style="margin-bottom: 48px;">
-    <div style="font-family: var(--font-mono); font-size: 12px; color: var(--brand); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;">
-      CHANGELOG · RSS
-      <a href="{{ "/changelog/index.xml" | relURL }}" style="margin-left: 8px; color: var(--fg-muted); text-decoration: underline;">订阅</a>
-    </div>
-    <h1 style="font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px;">更新日志</h1>
-    <p style="font-size: 17px; color: var(--fg-muted); line-height: 1.6; max-width: 620px;">
-      每个版本都有明确的变更点。从 v1.1.3 到今天，公开可追溯。
-    </p>
-  </header>
-
-  {{ with .Content }}
-  <div class="prose" style="max-width: var(--container-narrow); margin-bottom: 48px;">{{ . }}</div>
-  {{ end }}
-
-  <div class="changelog-list">
-    {{- range .Pages.ByDate.Reverse }}
-    <a href="{{ .RelPermalink }}" class="changelog-item">
-      <div class="changelog-item__side">
-        <span class="changelog-item__version">{{ .Params.version | default .Title }}</span>
-        <span class="changelog-item__date">{{ .Date.Format "2006-01-02" }}</span>
-        {{- with .Params.channel }}<span class="badge badge--muted">{{ . }}</span>{{ end }}
-      </div>
-      <div>
-        <h2 class="changelog-item__title">{{ .Params.summary | default .Title }}</h2>
-        {{- with .Params.highlights }}
-        <p class="changelog-item__summary">{{ delimit . " · " }}</p>
-        {{- end }}
-        {{- with .Params.tags }}
-        <div class="changelog-item__tags">
-          {{- range . }}<span class="badge">{{ . }}</span>{{ end }}
-        </div>
-        {{- end }}
-      </div>
-    </a>
-    {{- end }}
+<section class="releases page-section"><div class="wrap">
+  <div class="section-top"><div><p class="eyebrow">RELEASE NOTES</p><h1>一步一步，持续进化。</h1></div><p>每一次更新，都有迹可循。<br><a class="inline-link" href="{{ "/changelog/index.xml" | strings.TrimPrefix "/" | relURL }}">订阅更新 RSS ↗</a></p></div>
+  <div class="release-list">
+    {{ range $index, $page := .Pages.ByDate.Reverse }}
+    <article class="release-row">
+      <div class="release-meta"><h2>{{ .Params.version | default .Title }}</h2>{{ if eq .Params.version site.Params.latestVersion }}<span class="tag">当前版本</span>{{ end }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></div>
+      <details class="release-content"{{ if eq $index 0 }} open{{ end }}><summary>{{ .Params.summary | default .Title }}</summary>
+        <div class="release-details">{{ range .Params.highlights }}<p>{{ replaceRE `^[^\p{L}\p{N}]+` "" . }}</p>{{ end }}<a class="inline-link" href="{{ .RelPermalink }}">完整更新说明 ↗</a></div>
+      </details>
+    </article>
+    {{ else }}<p class="empty-state">更新记录整理中。<a href="{{ "/download/" | strings.TrimPrefix "/" | relURL }}">查看当前版本</a></p>{{ end }}
   </div>
-</section>
+</div></section>
 {{ end }}

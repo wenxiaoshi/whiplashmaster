@@ -1,0 +1,72 @@
+[
+  {
+    "version": "v1.1.3",
+    "date": "2026-04-25",
+    "commit": "4b16582eda96283edaabf041e1cb2003d0c2fc36"
+  },
+  {
+    "version": "v1.1.4",
+    "date": "2026-04-25",
+    "commit": "8cb7aab2337ae6923983340c60bb03c2a45f161e"
+  },
+  {
+    "version": "v1.1.5",
+    "date": "2026-04-26",
+    "commit": "ce8fc3c0ddbd3380bba13db4dd6083d54d2be617"
+  },
+  {
+    "version": "v1.2.0",
+    "date": "2026-04-30",
+    "commit": "09f2a00b12bb2b7ca1b63c93e82bc94b805885df"
+  },
+  {
+    "version": "v1.3.0",
+    "date": "2026-05-02",
+    "commit": "ceb53f3befbac0f14ee05baba585e9e034b16929"
+  },
+  {
+    "version": "v1.4.0",
+    "date": "2026-05-09",
+    "commit": "d16dd09874b3267bc35583eeef847e74890a49f9"
+  },
+  {
+    "version": "v1.4.1",
+    "date": "2026-05-16",
+    "commit": "382fa709e18659391d37b7abcae638a159e0d63e"
+  },
+  {
+    "version": "v1.4.2",
+    "date": "2026-05-21",
+    "commit": "775d80918a5699813b58014c2d28e34cca706287"
+  },
+  {
+    "version": "v1.4.3",
+    "date": "2026-06-02",
+    "commit": "16692d3fcc3859eb5472b06c1dc8129c04f5851a"
+  },
+  {
+    "version": "v1.4.4",
+    "date": "2026-06-17",
+    "commit": "92be5af713e63d899dbae77b10d9a30ee7707f0d"
+  },
+  {
+    "version": "v1.5.0",
+    "date": "2026-07-05",
+    "commit": "de2e3faf5c2eced050307c5e31f6e2aebeb7e792"
+  },
+  {
+    "version": "v2.0.0",
+    "date": "2026-07-19",
+    "commit": "03e34657d55f60ee94c2148f1bd340887e466002"
+  },
+  {
+    "version": "v2.0.1",
+    "date": "2026-07-19",
+    "commit": "1c1b63097318ad7c2b4ecd2a76cf8833b19485dc"
+  },
+  {
+    "version": "v2.1.0",
+    "date": "2026-07-30",
+    "commit": "d89179814f0368e2fa738c7a9db4834a4528b9b6"
+  }
+]

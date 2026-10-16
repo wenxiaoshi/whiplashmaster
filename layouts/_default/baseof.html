@@ -1,25 +1,15 @@
-{{/* baseof.html · 所有页面的骨架
-
-  提供的 block：
-    - main   : 主内容区
-    - title  : <title> 值（默认站点 title）
-
-  变量约定：
-    - .Site.Params.brandColor     : 品牌主色
-    - .Site.Params.latestVersion  : 最新版本号
-*/ -}}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ site.Language.LanguageCode }}">
 <head>
   {{ partial "head.html" . }}
-  <title>{{ block "title" . }}{{ site.Title }}{{ end }}</title>
+  <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
 </head>
 <body>
+  <a class="skip" href="#main-content">跳至主要内容</a>
   {{ partial "header.html" . }}
-  <main>
-    {{ block "main" . }}{{ end }}
-  </main>
+  <main id="main-content">{{ block "main" . }}{{ end }}</main>
   {{ partial "footer.html" . }}
-  <script src="{{ "js/theme.js" | relURL }}" defer></script>
+  {{ $js := resources.Get "js/site.js" | minify | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
 </body>
 </html>

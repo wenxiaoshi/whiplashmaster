@@ -42,6 +42,19 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify carousel behavior
+        run: node --test tests/site.test.cjs
+
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
@@ -49,8 +62,14 @@ jobs:
         run: |
           hugo \
             --gc \
+            --cleanDestinationDir \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+      - name: Check pages, links and download integrity
+        env:
+          SITE_BASE_URL: ${{ steps.pages.outputs.base_url }}/
+        run: python3 scripts/check_site.py public --base-url "$SITE_BASE_URL"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

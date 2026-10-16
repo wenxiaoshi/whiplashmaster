@@ -1,0 +1,16 @@
+<section class="home-carousel" data-carousel data-interval="{{ site.Params.carouselInterval }}" aria-label="App 功能介绍" aria-roledescription="轮播">
+  <div class="home-feature-nav" role="tablist" aria-label="选择预览功能">
+    {{ range $index, $feature := site.Data.features }}
+      <button class="home-feature" role="tab" id="home-tab-{{ $index }}" aria-controls="home-slide-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}" tabindex="{{ if eq $index 0 }}0{{ else }}-1{{ end }}" data-slide="{{ $index }}"><span class="home-feature-number">{{ printf "%02d" (add $index 1) }}</span><strong>{{ .title }}</strong><span class="home-feature-description">{{ .summary }}</span></button>
+    {{ end }}
+  </div>
+  <div class="screenshot-stage">
+    {{ range $index, $feature := site.Data.features }}
+      <figure class="home-slide" id="home-slide-{{ $index }}" role="tabpanel" aria-labelledby="home-tab-{{ $index }}" data-panel{{ if ne $index 0 }} hidden{{ end }}>
+        <img class="real-app-shot" src="{{ printf "img/screenshots/%s" .image | strings.TrimPrefix "/" | relURL }}" width="{{ .width }}" height="{{ .height }}" alt="{{ .alt }}" decoding="async"{{ if eq $index 0 }} fetchpriority="high"{{ end }}>
+        <p class="image-fallback" hidden>截图暂时无法显示。<a href="{{ .path | strings.TrimPrefix "/" | relURL }}">了解{{ .title }} →</a></p>
+      </figure>
+    {{ end }}
+  </div>
+  <div class="home-carousel-footer"><span class="carousel-count" data-count>01 / {{ printf "%02d" (len site.Data.features) }}</span><span class="home-demo-label">App 实际截图</span><button class="carousel-pause" data-pause aria-label="暂停自动轮播">暂停轮播</button></div>
+</section>

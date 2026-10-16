@@ -4,7 +4,7 @@ description: "WhiplashMaster 完整功能操作指南"
 date: 2026-07-19
 ---
 
-> 完整 PDF 版本：[下载 PDF](/manual/manual.pdf)（如未上线可先查看本页在线版）
+> 安装包与 iOS 安装入口请查看[下载页](/download/)。以下为在线使用说明。
 
 ---
 

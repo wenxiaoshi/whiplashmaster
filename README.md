@@ -1,229 +1,69 @@
-# WhiplashMaster · 官网
+# Whiplash Master 官网
 
-> 「鼓手最严格的老师」的官方网站，用于版本发布、功能介绍、Roadmap 公示与用户反馈收集。
+鼓手 App 的 Hugo 静态官网。红黑主题、四张真实 App 截图、独立功能子页面、版本记录、Android APK 直装与 iOS TestFlight 安装路径。
 
-**在线地址**：<https://whiplashmaster.github.io/>（部署后生效）
+## 本地运行
 
----
+需要 Hugo Extended 0.158.0、Node.js 22+ 和 Python 3.11+；没有 npm 依赖。
 
-## 目录导览
-
-```
-Code-Website/
-├── hugo.toml                # Hugo 全局配置（品牌色、菜单、外链、Tally ID 等）
-├── archetypes/              # 新内容模板
-├── assets/css/main.css      # 极客风主题 CSS（882 行 · 深浅色 + 品牌橙 #FF6D00）
-├── content/                 # 所有页面内容（Markdown）
-│   ├── _index.md            # 首页元数据
-│   ├── features/            # 功能介绍
-│   ├── download/            # 下载页
-│   ├── changelog/           # 14 个版本更新日志
-│   ├── roadmap/             # Roadmap 三档看板
-│   ├── feedback/            # 反馈页
-│   └── about/               # 关于 / 隐私政策 / 使用手册
-├── layouts/                 # 自写 layouts（不依赖第三方主题）
-│   ├── _default/            # baseof / list / single
-│   ├── partials/            # head / header / footer
-│   ├── changelog/           # 更新日志专属 layout
-│   ├── download/            # 下载页 tab 布局
-│   ├── feedback/            # 反馈页
-│   ├── roadmap/             # Roadmap 看板
-│   └── index.html           # 首页
-├── static/                  # 静态资源
-│   ├── img/                 # logo 等
-│   ├── assets/              # 微信二维码
-│   └── js/theme.js          # 主题切换 + 移动菜单 + 下载 tab 逻辑
-└── .github/workflows/hugo.yml   # GitHub Pages 自动部署
+```sh
+hugo server --baseURL http://localhost:1313/ --disableFastRender
 ```
 
----
+浏览器打开终端提示的地址。普通生产构建：
 
-## 本地开发
-
-### 依赖
-
-- **Hugo Extended v0.128.0+**（macOS：`brew install hugo`）
-- **Git**
-
-### 启动预览
-
-```bash
-cd Code-Website
-hugo server -D    # -D 显示 draft
-# 打开 http://localhost:1313
+```sh
+hugo --gc --minify --baseURL https://your-site.example/
+node --test tests/site.test.cjs
+python3 scripts/check_site.py public --base-url https://your-site.example/
 ```
 
-### 构建静态站点
+`public/` 是可直接部署的静态文件，包括 APK。`baseURL` 及上述检查必须使用最终部署地址；路径可以是域名根目录，也可以是 GitHub Pages 的 `/whiplashmaster-site/` 子路径。默认配置只表达独立官网的预期路径，不表示已上线。
 
-```bash
-hugo --gc --minify --baseURL "/"
-# 产物在 public/
-```
+## 页面结构
 
----
+| 路径 | 内容 |
+|---|---|
+| `/` | 四项功能与真实截图，每 3 秒轮播 |
+| `/features/` | 评分练习 |
+| `/features/companion/` | 节拍陪伴 |
+| `/features/free-play/` | 自由演奏 |
+| `/features/history/` | 练习记录 |
+| `/changelog/` | 版本记录列表；点击展开、进入完整说明 |
+| `/changelog/v2.1.0/` | v2.1.0 发布说明 |
+| `/download/` | Android APK 与 iOS TestFlight |
+| `/about/manual/`、`/about/privacy/` | 使用手册、隐私政策 |
 
-## 常见任务 SOP
+顶部导航是独立页面链接；首页四功能控件只切换截图，不滚动页面。屏幕变窄后导航常驻品牌栏下方，没有额外“菜单”。既有关于、反馈、Roadmap 及历史版本链接继续可访问。
 
-### 1. 发布新版本 changelog
+## 内容与素材
 
-发布 App 新版本后，跟随以下步骤同步官网：
+- `data/features.json`：四项功能的标题、介绍、图片尺寸、替代文字和独立路径。
+- `static/img/screenshots/`：用户提供的四张原图。保留原始比例与橙黑配色，通过 `object-fit: contain` 放进固定尺寸展示框；原图哈希与文件来源见 `sources.json`。不要把原图里的 UI、数字或颜色改写成网页的品牌色。
+- `assets/css/main.css`：红黑视觉与响应式样式。
+- `assets/js/site.js`：无依赖的轮播。支持键盘、手动选择、暂停/继续；后台停止计时，系统“减少动态效果”下默认暂停。截图加载失败时显示功能页入口。
+- `content/changelog/`：版本说明 Markdown。14 个版本的日期依据 App 实际 Git 标签校对；摘要依据标签说明与相关提交整理，去除旧骨架中无法证实的量化宣称。标签与 commit 索引见 `data/releases-audit.json`。v2.1.0 对应 `d891798` / 2026-07-30。
 
-#### Step 1：新建 changelog 页
+## 更新版本与下载
 
-```bash
-hugo new changelog/v2.0.2.md
-```
+1. 将已签名 APK 放入 `static/downloads/`。当前为 `WhiplashMaster-v2.1.0-KMM-release.apk`（33,366,222 字节，versionCode 16，最低 Android 10）。
+2. 更新 `data/android.json` 的版本、日期、文件名、静态路径、字节数、最低系统与 SHA-256；校验脚本会核对构建产物。
+3. 更新 `hugo.toml` 的 `latestVersion` 和 `latestVersionDate`。
+4. 运行 `hugo new content changelog/vX.Y.Z.md`，填写真实日期、摘要与 highlights，完成审核后移除 `draft: true`。
+5. 构建并执行上述两个检查命令。首页版本号应能进入相应发布说明。
 
-或直接复制 [content/changelog/v2.0.1.md](content/changelog/v2.0.1.md) 修改。
+下载页默认使用站内 APK。未来将安装包迁移至已验证的 GitHub Releases 或对象存储时，把 `[params.downloads].androidURL` 配置为真实完整 URL；本次没有使用旧官网会返回 404 的推测 Release 地址。当前 APK 仍随构建发布，校验脚本会检查它的大小和哈希。
 
-frontmatter 约定：
-
-```yaml
----
-title: "v2.0.2"
-version: "v2.0.2"
-date: 2026-08-15         # 发布日期
-channel: "release"       # release / beta
-versionCode: 16          # Android versionCode
-summary: "一句话摘要（首页会展示）"
-highlights:              # 3~5 个亮点，首页 / 列表页展示
-  - "🐛 xxx"
-  - "✨ xxx"
-tags: ["bugfix", "feature", "major"]   # 选填
-apkURL: ""               # 选填，不填则按约定构造：
-                         # https://github.com/{owner}/{repo}/releases/download/{version}/WhiplashMaster-{version}-KMM-release.apk
-iosNote: ""              # 选填，iOS 端说明（TestFlight / App Store）
----
-
-## 正文...
-```
-
-#### Step 2：更新首页最新版本
-
-修改 [hugo.toml](hugo.toml) `[params]`：
-
-```toml
-latestVersion = "v2.0.2"
-latestVersionDate = "2026-08-15"
-```
-
-#### Step 3：把 APK 传到 GitHub Releases
-
-```bash
-# 项目仓库操作（不是官网仓库）
-git tag v2.0.2
-git push origin v2.0.2
-
-# 在 GitHub 网页端创建 Release，上传 APK 附件：
-# 安装包/WhiplashMaster-v2.0.2-KMM-release.apk
-```
-
-APK 命名必须严格按 `WhiplashMaster-{version}-KMM-release.apk` 约定，否则下载页链接失效。
-
-#### Step 4：commit + push
-
-```bash
-git add content/changelog/v2.0.2.md hugo.toml
-git commit -m "chore(changelog): release v2.0.2"
-git push
-```
-
-GitHub Actions 会在 2-3 分钟内自动部署到 GitHub Pages。
-
----
-
-### 2. 调整 Roadmap
-
-编辑 [content/roadmap/_index.md](content/roadmap/_index.md) 的三档数组：
-
-```yaml
-planned:       # 规划中
-  - title: "xxx"
-    desc: "xxx"
-in_progress:   # 开发中
-beta:          # 内测中
-```
-
-按发布节奏定期迁移条目（planned → in_progress → beta → changelog）。
-
----
-
-### 3. 更新反馈渠道
-
-#### 配置 Tally 表单
-
-1. 到 <https://tally.so/> 免费创建一份反馈表单
-2. 拷贝表单 ID（形如 `mYourFormId`，从表单 URL 提取）
-3. 修改 [hugo.toml](hugo.toml)：
-
-```toml
-tallyFormId = "mYourFormId"   # 替换为你的真实 ID
-```
-
-未配置时，反馈页会降级为「微信 / 小红书」两个渠道 + 提示文字。
-
-#### 替换微信 / 小红书
-
-- 微信二维码：替换 [static/assets/wechat-qr.jpg](static/assets/wechat-qr.jpg)
-- 小红书链接：修改 [hugo.toml](hugo.toml) `xiaohongshu` 字段
-
----
-
-### 4. 自定义域名
-
-若购买了独立域名（如 `whiplashmaster.com`）：
-
-1. 在域名 DNS 添加 CNAME 记录指向 `whiplashmaster.github.io`
-2. 在 `static/` 目录创建 `CNAME` 文件，内容为 `whiplashmaster.com`
-3. 修改 [hugo.toml](hugo.toml)：
-
-```toml
-baseURL = "https://whiplashmaster.com/"
-```
-
-4. push 后 GitHub Pages 设置页会自动识别 CNAME
-
----
+`[params.downloads].iosURL` 当前取自项目使用手册：`https://testflight.apple.com/join/GvJkTs9D`。2026-10-17 HTTP 检查返回 200，页面显示 Whiplash Master 邀请；具体构建与名额由 TestFlight 决定。链接为空时页面自动提供反馈联系入口，不显示假按钮。
 
 ## 部署
 
-### GitHub Pages（推荐）
+`.github/workflows/hugo.yml` 保留 GitHub Pages 工作流，加入轮播测试与构建检查。推送 `main` / `master` 或手动触发后，Actions 会构建并发布 `public/`。正式使用前：
 
-已通过 [.github/workflows/hugo.yml](.github/workflows/hugo.yml) 自动化：
+1. 为官网配置专用远端仓库，避免覆盖个人博客。
+2. 在目标仓库 Settings → Pages 选择 GitHub Actions。
+3. 让 Actions 使用 Pages 返回的 `base_url`；使用独立域名时同步设置 `hugo.toml` 和 DNS。
 
-- 推送 `main` / `master` 分支 → 触发 Actions
-- Hugo 构建 → 上传到 Pages artifact → 部署
+当前本地仓库没有远端，本次开发不会创建仓库、修改博客或触发生产发布。需求、实现与验收记录位于 `Document/feature-official-homepage/`。
 
-**首次配置**：仓库 Settings → Pages → Source → **GitHub Actions**
-
-### 手工部署到其他平台
-
-```bash
-hugo --gc --minify --baseURL "https://your-domain.com/"
-# 把 public/ 目录上传到任意静态托管（Vercel / Netlify / OSS）
-```
-
----
-
-## 设计规范
-
-- **品牌色**：`#FF6D00`（活力橙，与 App `OrangeThemePrimary` 对齐）
-- **字体**：
-  - 正文：`-apple-system` 系统字体优先 + `Inter`
-  - 版本号 / 元数据：`JetBrains Mono` / `SF Mono`
-- **深浅色**：`data-theme` 属性切换 + `prefers-color-scheme` 回退，localStorage 记忆用户选择
-- **响应式断点**：`900px` / `640px`
-
----
-
-## 贡献
-
-- Bug / 建议 → 直接改 Markdown 提 PR
-- 视觉调整 → 修 [assets/css/main.css](assets/css/main.css)
-- 结构调整 → 修 [layouts/](layouts/) 目录
-
----
-
-## License
-
-内容 CC BY-NC 4.0 · 代码 MIT
+内容 CC BY-NC 4.0 · 代码 MIT。

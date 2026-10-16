@@ -1,0 +1,16 @@
+{{ $id := .Params.featureid | default "scored" }}
+{{ $current := index (where site.Data.features "id" $id) 0 }}
+<section class="features page-section">
+  <div class="wrap">
+    <div class="section-top"><div><p class="eyebrow">THE PRACTICE</p><h1>{{ $current.title }}</h1></div><p>{{ $current.summary }}</p></div>
+    <div class="feature-layout">
+      <nav class="feature-tabs" aria-label="功能分类">
+        {{ range $index, $feature := site.Data.features }}
+          <a class="feature-tab" href="{{ .path | strings.TrimPrefix "/" | relURL }}"{{ if eq .id $id }} aria-current="page"{{ end }}><span class="num">{{ printf "%02d" (add $index 1) }}</span><div><h2>{{ .title }}</h2>{{ if eq .id $id }}<p>{{ .description }}</p>{{ end }}</div><span class="tab-arrow" aria-hidden="true">↗</span></a>
+        {{ end }}
+      </nav>
+      <div class="screenshot-stage feature-screenshot"><figure class="home-slide"><img class="real-app-shot" src="{{ printf "img/screenshots/%s" $current.image | strings.TrimPrefix "/" | relURL }}" width="{{ $current.width }}" height="{{ $current.height }}" alt="{{ $current.alt }}"></figure></div>
+    </div>
+    <div class="feature-followup"><a class="text-link" href="{{ "/about/manual/" | strings.TrimPrefix "/" | relURL }}">查看使用手册 <span aria-hidden="true">↗</span></a></div>
+  </div>
+</section>

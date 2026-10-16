@@ -1,0 +1,22 @@
+[
+  {
+    "file": "scored.jpg",
+    "original": "codex-clipboard-30b7b4e1-07d5-4c33-98c4-a04ce8762dd9.jpg",
+    "sha256": "ed557568dc2f9d27362d89ba15f797f2152c3b71c3f18ad3aa77910fef2a4dc0"
+  },
+  {
+    "file": "companion.jpg",
+    "original": "codex-clipboard-ada495af-6880-4f04-8882-038aaf7213d9.jpg",
+    "sha256": "14216098ce258480a314e53738a1126ba7ef8262f99fe96e004c655a498e33d2"
+  },
+  {
+    "file": "free-play.jpg",
+    "original": "codex-clipboard-33a69207-835b-45a7-a830-d1632cd3d610.jpg",
+    "sha256": "f727926959f7f8578830017bded9675f78226c973cd59bdf1a24ca48c998e035"
+  },
+  {
+    "file": "history.jpg",
+    "original": "codex-clipboard-15f385ca-3e78-47ea-86e9-a2b764e85590.jpg",
+    "sha256": "9f513d3acfff9187c86c9d1ed6dc7b3ff7907f114bde489021d315a5677b2296"
+  }
+]
