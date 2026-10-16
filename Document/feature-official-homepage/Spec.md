@@ -6,7 +6,7 @@ Goal：把已经审定的红黑官网视觉稿接入现有 Hugo 仓库，提供�
 
 Scenario：访客打开首页了解 App，在四张真实截图之间切换，通过顶部导航进入独立页面，下载 Android APK 或打开 iOS TestFlight。
 
-Boundary：页面内容来自 Hugo Markdown、功能数据和站点配置；截图为用户提供的原图；Android 包来自本地 v2.1.0 release 文件；iOS 链接来自项目使用手册并经 HTTP 核验。只修改官网仓库，不修改 App、个人博客或原始截图。不发布到未经确认的远端或覆盖博客站点。
+Boundary：页面内容来自 Hugo Markdown、功能数据和站点配置；截图为用户提供的原图；Android 包来自本地 v2.1.0 release 文件；iOS 链接按用户最新决定留空，待补充。只修改官网仓库，不修改 App、个人博客或原始截图。不发布到未经确认的远端或覆盖博客站点。
 
 ## Acceptance
 
@@ -14,8 +14,12 @@ Boundary：页面内容来自 Hugo Markdown、功能数据和站点配置；截�
 2. AC2：首页、功能、版本记录、下载使用独立 URL；四个功能分类分别有子页面，导航高亮正确；支持直接打开与刷新。
 3. AC3：四张真实截图完整等比展示，容器切换不跳动；每 3 秒循环，支持手动、键盘及暂停，后台暂停，遵守减少动态效果设置。
 4. AC4：去除 mock 标记与编造的发布日期；版本来自已存在的 release Markdown，新增 v2.1.0 记录依据本地 tag（2026-07-30，d891798）。
-5. AC5：Android CTA 下载实际 APK，展示大小与 SHA-256；iOS CTA 使用项目内 TestFlight 邀请；不构造未验证的 GitHub Release URL。
+5. AC5：Android CTA 下载实际 APK，展示大小与 SHA-256；iOS 邀请未配置时提供“申请内测”的联系入口，配置后显示 TestFlight 邀请；不构造未验证的 GitHub Release URL。
 6. AC6：Hugo 生产构建、JS 语法和交互测试、内部链接与资源检查通过；验证根路径与 GitHub Pages 子路径，以及 390px / 320px 窄屏。
 7. AC7：保留现有手册、隐私政策与历史记录可访问；提供维护说明、配置入口和构建检查。
 
 Out of scope：App 功能变更、自动同步 App 发布、社交表单新接入、域名购买、远端仓库创建和生产部署。
+
+## 合并前补充决定
+
+2026-10-17 用户要求移除尚未就绪的 RSS 订阅功能，其他保持；TestFlight 链接稍后补充；代码合并到 `master` 并准备 GitHub Pages 发布。对应实现：删除订阅入口与 Markdown 提示、关闭 RSS 输出；清空 iOS 邀请配置并使用现有联系入口；将原 `main` 主分支统一为 `master`，工作流只监听 `master` 推送。

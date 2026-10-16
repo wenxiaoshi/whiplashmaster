@@ -1,6 +1,6 @@
 {{ define "main" }}
 <section class="releases page-section"><div class="wrap">
-  <div class="section-top"><div><p class="eyebrow">RELEASE NOTES</p><h1>一步一步，持续进化。</h1></div><p>每一次更新，都有迹可循。<br><a class="inline-link" href="{{ "/changelog/index.xml" | strings.TrimPrefix "/" | relURL }}">订阅更新 RSS ↗</a></p></div>
+  <div class="section-top"><div><p class="eyebrow">RELEASE NOTES</p><h1>一步一步，持续进化。</h1></div><p>每一次更新，都有迹可循。</p></div>
   <div class="release-list">
     {{ range $index, $page := .Pages.ByDate.Reverse }}
     <article class="release-row">

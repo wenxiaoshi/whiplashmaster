@@ -15,8 +15,13 @@
       <div class="platform-row"><h2>iOS</h2><span class="platform-type">TestFlight</span></div>
       <p>通过 TestFlight 安装与体验 iOS 版本。</p>
       {{ with site.Params.downloads.iosURL }}<a class="btn btn-secondary" href="{{ . }}" target="_blank" rel="noopener noreferrer">加入 TestFlight <span aria-hidden="true">↗</span></a>{{ else }}<a class="btn btn-secondary" href="{{ "/feedback/" | strings.TrimPrefix "/" | relURL }}">申请内测 <span aria-hidden="true">↗</span></a>{{ end }}
+      {{ if site.Params.downloads.iosURL }}
       <p class="download-note">内测版本与可用名额以 TestFlight 页面为准。</p>
       <details class="install-details"><summary>查看安装步骤</summary><ol><li>从 App Store 安装 TestFlight。</li><li>打开上方邀请链接。</li><li>在 TestFlight 中接受邀请并安装。</li></ol><p>如无法加入，可通过<a href="{{ "/feedback/" | strings.TrimPrefix "/" | relURL }}">反馈页</a>联系开发者。</p></details>
+      {{ else }}
+      <p class="download-note">申请 iOS 内测，请联系开发者。</p>
+      <details class="install-details"><summary>查看安装步骤</summary><ol><li>通过反馈页联系开发者，申请内测邀请。</li><li>从 App Store 安装 TestFlight。</li><li>收到邀请后，在 TestFlight 中接受邀请并安装。</li></ol></details>
+      {{ end }}
     </article>
   </div>
   <p class="download-disclaimer">{{ $android.version }} · {{ site.Params.latestVersionDate }} &nbsp; <a href="{{ printf "/changelog/%s/" $android.version | strings.TrimPrefix "/" | relURL }}">查看更新说明 ↗</a></p>

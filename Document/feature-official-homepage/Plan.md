@@ -3,11 +3,13 @@
 ```yaml
 Target Branch: feature/official-homepage
 Worktree Path: /Users/wenshy/Desktop/WhiplashTeacher/Code-Website
-Base Branch: main
+Base Branch: master
 Owner: codex-01a146da-9d60-7562-94f8-785062938198
 ```
 
 本次是独立 Code-Website Git 仓库，不涉及 KMM 工作树、构建或 Session Lock。仓库初始干净，无远端，无其他 worktree；在其专用功能分支实施。验收以 Spec.md 为准。
+
+初始主分支名为 `main`；按用户合并要求统一为 `master`，分支重命名保留原提交历史。2026-10-17 合并前补充范围为移除 RSS、暂留 iOS 内测联系入口、准备 Pages 发布；不调整其他视觉样式。
 
 ## 文件结构与任务
 

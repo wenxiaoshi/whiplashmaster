@@ -5,7 +5,10 @@ title = "Whiplash Master · 鼓手最严格的老师"
 enableRobotsTXT = true
 
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML"]
+  section = ["HTML"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
 [taxonomies]
   tag = "tags"
 [markup.goldmark.renderer]
@@ -42,6 +45,7 @@ enableRobotsTXT = true
 [params.downloads]
   # Empty androidURL uses the bundled APK described by data/android.json.
   androidURL = ""
-  iosURL = "https://testflight.apple.com/join/GvJkTs9D"
+  # Configure the invitation supplied by the owner before opening public iOS access.
+  iosURL = ""
 [params.footer]
   since = 2026

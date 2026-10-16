@@ -54,16 +54,18 @@ python3 scripts/check_site.py public --base-url https://your-site.example/
 
 下载页默认使用站内 APK。未来将安装包迁移至已验证的 GitHub Releases 或对象存储时，把 `[params.downloads].androidURL` 配置为真实完整 URL；本次没有使用旧官网会返回 404 的推测 Release 地址。当前 APK 仍随构建发布，校验脚本会检查它的大小和哈希。
 
-`[params.downloads].iosURL` 当前取自项目使用手册：`https://testflight.apple.com/join/GvJkTs9D`。2026-10-17 HTTP 检查返回 200，页面显示 Whiplash Master 邀请；具体构建与名额由 TestFlight 决定。链接为空时页面自动提供反馈联系入口，不显示假按钮。
+`[params.downloads].iosURL` 当前留空，等待维护者补充正式 TestFlight 邀请链接。页面提供“申请内测”的反馈联系入口及对应安装说明；补充真实完整 URL 后，会自动显示“加入 TestFlight”。
+
+RSS 尚未开放：版本记录页不显示订阅入口，Hugo 也不生成 RSS 输出。
 
 ## 部署
 
-`.github/workflows/hugo.yml` 保留 GitHub Pages 工作流，加入轮播测试与构建检查。推送 `main` / `master` 或手动触发后，Actions 会构建并发布 `public/`。正式使用前：
+`.github/workflows/hugo.yml` 保留 GitHub Pages 工作流，加入轮播测试与构建检查。主分支统一为 `master`；推送 `master` 或手动触发后，Actions 会构建并发布 `public/`。正式使用前：
 
-1. 为官网配置专用远端仓库，避免覆盖个人博客。
+1. 为官网配置专用远端仓库，默认分支设为 `master`，避免覆盖个人博客。
 2. 在目标仓库 Settings → Pages 选择 GitHub Actions。
 3. 让 Actions 使用 Pages 返回的 `base_url`；使用独立域名时同步设置 `hugo.toml` 和 DNS。
 
-当前本地仓库没有远端，本次开发不会创建仓库、修改博客或触发生产发布。需求、实现与验收记录位于 `Document/feature-official-homepage/`。
+当前本地仓库没有远端，尚未触发生产发布。具体发布准备见 [GitHub Pages 发布清单](Document/feature-official-homepage/github-release.md)。需求、实现与验收记录位于 `Document/feature-official-homepage/`。
 
 内容 CC BY-NC 4.0 · 代码 MIT。
