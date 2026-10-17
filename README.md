@@ -18,7 +18,7 @@ node --test tests/site.test.cjs
 python3 scripts/check_site.py public --base-url https://your-site.example/
 ```
 
-`public/` 是可直接部署的静态文件，包括 APK。`baseURL` 及上述检查必须使用最终部署地址；路径可以是域名根目录，也可以是 GitHub Pages 的 `/whiplashmaster-site/` 子路径。默认配置只表达独立官网的预期路径，不表示已上线。
+`public/` 是可直接部署的静态文件，包括 APK。`baseURL` 及上述检查必须使用最终部署地址；当前目标是 `https://wenxiaoshi.github.io/whiplashmaster/`。工作流也支持其他仓库子路径，不表示站点已上线。
 
 ## 页面结构
 
@@ -66,6 +66,6 @@ RSS 尚未开放：版本记录页不显示订阅入口，Hugo 也不生成 RSS 
 2. 在目标仓库 Settings → Pages 选择 GitHub Actions。
 3. 让 Actions 使用 Pages 返回的 `base_url`；使用独立域名时同步设置 `hugo.toml` 和 DNS。
 
-当前本地仓库没有远端，尚未触发生产发布。具体发布准备见 [GitHub Pages 发布清单](Document/feature-official-homepage/github-release.md)。需求、实现与验收记录位于 `Document/feature-official-homepage/`。
+官网专用远端为 `https://github.com/wenxiaoshi/whiplashmaster.git`。当前仓库为 Private，Pages 页面提示需升级套餐或改为公开才可启用；尚未推送官网代码或触发生产发布。具体发布准备见 [GitHub Pages 发布清单](Document/feature-official-homepage/github-release.md)。需求、实现与验收记录位于 `Document/feature-official-homepage/`。
 
 内容 CC BY-NC 4.0 · 代码 MIT。

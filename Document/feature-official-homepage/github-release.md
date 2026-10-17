@@ -12,14 +12,20 @@
 
 ## 连接并发布
 
-1. 确认官网专用 GitHub 仓库的完整地址。不要使用个人博客仓库。当前本地没有 `origin`，未执行远端推送。
-2. 在 `Code-Website` 中将该地址添加为 `origin`，推送本地 `master`，并将 GitHub 仓库默认分支设为 `master`。
+1. 官网专用仓库已确认为 `https://github.com/wenxiaoshi/whiplashmaster`，本地 `origin` 已配置。2026-10-17 浏览器确认远端为 Private，仅有 `main` 上的一次初始化 README 提交（`6445fc9`）；尚未推送本地官网代码。
+2. 恢复 GitHub CLI 登录后，在 `Code-Website` 中推送本地 `master`，保留远端既有 `main` 初始化提交，并将 GitHub 仓库默认分支设为 `master`。
 3. 仓库 Settings → Pages → Build and deployment → Source 选择 **GitHub Actions**。
 4. 如首次推送早于 Pages 配置，在 Actions 中手动运行 **Deploy Hugo site to Pages**。
 5. 检查 build、deploy 均通过；工作流采用 GitHub Pages 返回的 `base_url`，支持仓库子路径。`hugo.toml` 的 `baseURL` 也应更新为最终站点地址，供本地生产构建使用。
 6. 打开工作流给出的站点 URL，检查首页、独立功能页、版本记录、Android 下载及 iOS 联系入口。
 
-当前配置中的 `https://wenxiaoshi.github.io/whiplashmaster-site/` 仅为预期地址，不表示对应远端已创建或站点已发布。若采用其他仓库或独立域名，以实际 Pages 地址为准。
+站点目标地址已改为 `https://wenxiaoshi.github.io/whiplashmaster/`，目前尚未上线。如使用独立域名，以实际 Pages 地址为准。
+
+## 当前启用条件
+
+在维护者已登录的 Chrome 中，Pages 设置页面明确显示 **Upgrade or make this repository public to enable Pages**；因此当前看不到 Build and deployment / Source。需要维护者选择升级套餐，或明确确认将官网仓库改为 Public 后，再完成上述配置。公开仓库会公开全部源码、文件和提交历史，不能将“使用该仓库”视为自动授权变更可见性。
+
+此外，本机 GitHub CLI 的现有凭据失效，当前连接器也没有该私有仓库的访问权限。推送前需要恢复 GitHub CLI 登录；不通过浏览器读取会话凭据、不创建临时 Token，也不强制覆盖远端初始分支。
 
 ## 后续维护
 
