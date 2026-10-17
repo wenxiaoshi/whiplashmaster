@@ -9,7 +9,7 @@
       <p>下载安装包，在 Android 设备上直接安装。</p>
       <a class="btn" href="{{ $androidURL | strings.TrimPrefix "/" | relURL }}" download="{{ $android.file }}">下载 Android 版 <span aria-hidden="true">↗</span></a>
       <p class="download-note">{{ $android.version }} · {{ $android.minimumAndroid }} 及以上 · {{ printf "%.1f" (div (float $android.size) 1048576) }} MB</p>
-      <details class="install-details"><summary>安装说明与文件校验</summary><ol><li>用手机浏览器下载安装包。</li><li>打开 APK，按系统提示允许该来源安装。</li><li>启动 App，按需授予麦克风权限。</li></ol><p>SHA-256</p><code>{{ $android.sha256 }}</code></details>
+      <details class="install-details"><summary>安装说明</summary><ol><li>用手机浏览器下载安装包。</li><li>打开 APK，按系统提示允许该来源安装。</li><li>启动 App，按需授予麦克风权限。</li></ol></details>
     </article>
     <article class="download-card">
       <div class="platform-row"><h2>iOS</h2><span class="platform-type">TestFlight</span></div>
@@ -17,10 +17,10 @@
       {{ with site.Params.downloads.iosURL }}<a class="btn btn-secondary" href="{{ . }}" target="_blank" rel="noopener noreferrer">加入 TestFlight <span aria-hidden="true">↗</span></a>{{ else }}<a class="btn btn-secondary" href="{{ "/feedback/" | strings.TrimPrefix "/" | relURL }}">申请内测 <span aria-hidden="true">↗</span></a>{{ end }}
       {{ if site.Params.downloads.iosURL }}
       <p class="download-note">内测版本与可用名额以 TestFlight 页面为准。</p>
-      <details class="install-details"><summary>查看安装步骤</summary><ol><li>从 App Store 安装 TestFlight。</li><li>打开上方邀请链接。</li><li>在 TestFlight 中接受邀请并安装。</li></ol><p>如无法加入，可通过<a href="{{ "/feedback/" | strings.TrimPrefix "/" | relURL }}">反馈页</a>联系开发者。</p></details>
+      <details class="install-details"><summary>查看安装步骤</summary><ol><li>从 App Store 安装 TestFlight。</li><li>打开上方邀请链接。</li><li>在 TestFlight 中接受邀请并安装。</li></ol><p>如无法安装，可通过微信联系开发者，微信号：<strong>Wenshy_2048</strong>。</p></details>
       {{ else }}
       <p class="download-note">申请 iOS 内测，请联系开发者。</p>
-      <details class="install-details"><summary>查看安装步骤</summary><ol><li>通过反馈页联系开发者，申请内测邀请。</li><li>从 App Store 安装 TestFlight。</li><li>收到邀请后，在 TestFlight 中接受邀请并安装。</li></ol></details>
+      <details class="install-details"><summary>查看安装步骤</summary><ol><li>通过反馈页联系开发者，申请内测邀请。</li><li>从 App Store 安装 TestFlight。</li><li>收到邀请后，在 TestFlight 中接受邀请并安装。</li></ol><p>如无法安装，可通过微信联系开发者，微信号：<strong>Wenshy_2048</strong>。</p></details>
       {{ end }}
     </article>
   </div>
