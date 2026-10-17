@@ -6,7 +6,7 @@ Goal：把已经审定的红黑官网视觉稿接入现有 Hugo 仓库，提供�
 
 Scenario：访客打开首页了解 App，在四张真实截图之间切换，通过顶部导航进入独立页面，下载 Android APK 或打开 iOS TestFlight。
 
-Boundary：页面内容来自 Hugo Markdown、功能数据和站点配置；截图为用户提供的原图；Android 包来自本地 v2.1.0 release 文件；iOS 链接按用户最新决定留空，待补充。只修改官网仓库，不修改 App、个人博客或原始截图。不发布到未经确认的远端或覆盖博客站点。
+Boundary：页面内容来自 Hugo Markdown、功能数据和站点配置；截图为用户提供的原图；Android 包来自本地 v2.1.0 release 文件；iOS 邀请链接已由用户提供并配置。只修改官网仓库，不修改 App、个人博客或原始截图。发布到用户确认的官网专用仓库，不覆盖博客站点。
 
 ## Acceptance
 

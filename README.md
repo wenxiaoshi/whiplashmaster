@@ -54,7 +54,7 @@ python3 scripts/check_site.py public --base-url https://your-site.example/
 
 下载页默认使用站内 APK。未来将安装包迁移至已验证的 GitHub Releases 或对象存储时，把 `[params.downloads].androidURL` 配置为真实完整 URL；本次没有使用旧官网会返回 404 的推测 Release 地址。当前 APK 仍随构建发布，校验脚本会检查它的大小和哈希。
 
-`[params.downloads].iosURL` 当前留空，等待维护者补充正式 TestFlight 邀请链接。页面提供“申请内测”的反馈联系入口及对应安装说明；补充真实完整 URL 后，会自动显示“加入 TestFlight”。
+`[params.downloads].iosURL` 已配置维护者提供的 [TestFlight 公开邀请](https://testflight.apple.com/join/GvJkTs9D)。下载页显示“加入 TestFlight”及对应安装步骤；若将来清空链接，会自动回退为“申请内测”的反馈联系入口。内测构建与名额以 TestFlight 页面为准。
 
 RSS 尚未开放：版本记录页不显示订阅入口，Hugo 也不生成 RSS 输出。
 

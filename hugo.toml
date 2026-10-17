@@ -45,7 +45,7 @@ enableRobotsTXT = true
 [params.downloads]
   # Empty androidURL uses the bundled APK described by data/android.json.
   androidURL = ""
-  # Configure the invitation supplied by the owner before opening public iOS access.
-  iosURL = ""
+  # Public TestFlight invitation supplied by the owner.
+  iosURL = "https://testflight.apple.com/join/GvJkTs9D"
 [params.footer]
   since = 2026

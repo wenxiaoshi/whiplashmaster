@@ -7,7 +7,7 @@
 - 使用独立官网仓库，原 `main` 主分支统一为 `master`，保留提交历史。
 - Pages 工作流只监听 `master`，也支持手动触发；构建前运行轮播测试，上传前校验页面、链接、APK 与截图完整性。
 - RSS 功能暂时关闭，不生成订阅输出，也不显示订阅入口。
-- TestFlight 邀请链接暂时留空，下载页显示“申请内测”；维护者提供链接后填写 `hugo.toml` 中 `[params.downloads].iosURL`。
+- TestFlight 邀请链接已由维护者提供并配置在 `hugo.toml` 的 `[params.downloads].iosURL`，下载页显示“加入 TestFlight”。
 - Android v2.1.0 APK 已包含在静态资源中。
 
 ## 连接并发布
@@ -37,4 +37,4 @@
 
 ## 后续维护
 
-以后通过功能分支完成修改和检查，再合并到 `master`；推送 `master` 会触发发布。版本与安装包更新方法见根目录 README。TestFlight 链接是后续待补配置，不阻塞 Android 官网发布。
+以后通过功能分支完成修改和检查，再合并到 `master`；推送 `master` 会触发发布。版本与安装包更新方法见根目录 README。当前 TestFlight 邀请为 `https://testflight.apple.com/join/GvJkTs9D`，用户已于 2026-10-17 提供并确认使用。

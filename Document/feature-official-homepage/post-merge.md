@@ -36,3 +36,7 @@ Spec、Plan、review、README 及 GitHub Pages 发布清单已同步最新用户
 Pages 已启用 GitHub Actions。首轮 run `38984894837` 的云端测试、构建与资源完整性检查全部通过，部署被旧 `main` 环境分支策略阻止；已将该策略同步为仅允许 `master`，并重新运行失败任务。技术经验已加入 `github-release.md`，不修改全局 Memory 或 App 工程治理资产。
 
 修正后构建、部署均成功，官网已在 `https://wenxiaoshi.github.io/whiplashmaster/` 上线。线上浏览器验收通过：共享样式和四张真实截图全部加载，版本记录没有 RSS，下载页面提供 Android APK 和待补充 TestFlight 的申请内测入口。发布证据见 `evidence/published-home.jpg` 和 `evidence/pages-actions.jpg`。
+
+## TestFlight 邀请补充 · 2026-10-17
+
+用户提供 `https://testflight.apple.com/join/GvJkTs9D`，已配置到 `iosURL`。浏览器核验 Apple 邀请页面对应 Whiplash Master。下载模板已有配置分支，自动显示“加入 TestFlight”及相应安装步骤，无需修改模板、样式、Android 下载或 RSS 状态。该配置满足 AC5，代码及意图审查通过；本地生产构建与 28 个 HTML 页面的资源、内部链接和 APK 完整性检查通过，单独核对渲染后的邀请 URL 与按钮文案。仅改动官网配置及维护文档，不涉及 App 构建或原生平台。
