@@ -12,3 +12,4 @@ resources/
 
 # Local dev
 node_modules/
+__pycache__/

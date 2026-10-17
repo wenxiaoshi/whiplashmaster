@@ -55,6 +55,9 @@ jobs:
       - name: Verify carousel behavior
         run: node --test tests/site.test.cjs
 
+      - name: Verify Android ZIP publishing gate
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production

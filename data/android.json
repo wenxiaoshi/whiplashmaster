@@ -2,10 +2,15 @@
   "version": "v2.2.0",
   "versionCode": 17,
   "date": "2026-10-17",
-  "file": "WhiplashMaster-v2.2.0-KMM-release.apk",
-  "path": "downloads/WhiplashMaster-v2.2.0-KMM-release.apk",
-  "size": 32993535,
+  "file": "WhiplashMaster-v2.2.0-KMM-release.apk.zip",
+  "path": "downloads/WhiplashMaster-v2.2.0-KMM-release.apk.zip",
+  "size": 12751940,
   "minSdk": 29,
   "minimumAndroid": "Android 10",
-  "sha256": "19b430bd05437ec9defda79cc9ef7d0dc1bfa8acfee3ce1d51e1dcae8798aee4"
+  "sha256": "e4a774ddb745099eb740d6fcabca081ec52961519fd8c8e1d1427157e95322c6",
+  "apk": {
+    "file": "WhiplashMaster-v2.2.0-KMM-release.apk",
+    "size": 32993535,
+    "sha256": "19b430bd05437ec9defda79cc9ef7d0dc1bfa8acfee3ce1d51e1dcae8798aee4"
+  }
 }

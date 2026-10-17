@@ -2,6 +2,7 @@
 """Check a built Hugo site, including non-root GitHub Pages paths, offline."""
 import argparse
 import hashlib
+import io
 import json
 import re
 from html.parser import HTMLParser
@@ -17,6 +18,7 @@ class Document(HTMLParser):
         super().__init__()
         self.ids = []
         self.references = []
+        self.downloads = []
         self.controls = []
         self.h1_count = 0
         self.tabs = []
@@ -24,6 +26,8 @@ class Document(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == "a" and "download" in attrs:
+            self.downloads.append((attrs.get("href", ""), attrs["download"]))
         if "id" in attrs:
             self.ids.append(attrs["id"])
         if tag == "h1":
@@ -35,6 +39,40 @@ class Document(HTMLParser):
         for key in ("href", "src"):
             if attrs.get(key):
                 self.references.append(attrs[key])
+
+
+def check_android_package(package, android):
+    """Require a ZIP containing exactly the release APK, never an APK renamed ZIP."""
+    errors = []
+    if not android["file"].endswith(".zip") or Path(android["path"]).name != android["file"]:
+        errors.append("Android download must use a .zip file and matching path")
+    if not package.is_file():
+        return errors + ["Bundled Android ZIP missing"]
+    if package.stat().st_size != android["size"] or hashlib.sha256(package.read_bytes()).hexdigest() != android["sha256"]:
+        errors.append("Android ZIP size / SHA-256 mismatch")
+    apk = android.get("apk", {})
+    expected = f"WhiplashMaster-{android['version']}-KMM-release.apk"
+    if apk.get("file") != expected:
+        errors.append("Android ZIP APK metadata must match the release version")
+    try:
+        with zipfile.ZipFile(package) as archive:
+            if archive.testzip() is not None:
+                errors.append("Android ZIP CRC mismatch")
+            apks = [entry for entry in archive.infolist() if entry.filename.endswith(".apk")
+                    and not entry.filename.startswith("__MACOSX/")]
+            if len(apks) != 1 or apks[0].filename != expected:
+                return errors + ["Android ZIP must contain exactly one release APK at its root"]
+            payload = archive.read(apks[0])
+            if len(payload) != apk.get("size") or hashlib.sha256(payload).hexdigest() != apk.get("sha256"):
+                errors.append("APK inside Android ZIP size / SHA-256 mismatch")
+            with zipfile.ZipFile(io.BytesIO(payload)) as inner:
+                if not {"AndroidManifest.xml", "classes.dex"}.issubset(inner.namelist()):
+                    errors.append("Android ZIP payload is not an APK")
+                if inner.testzip() is not None:
+                    errors.append("APK inside Android ZIP CRC mismatch")
+    except (zipfile.BadZipFile, RuntimeError, NotImplementedError, OSError) as error:
+        errors.append(f"Invalid Android ZIP / APK: {error}")
+    return errors
 
 
 def check_site(destination, base_url):
@@ -92,14 +130,14 @@ def check_site(destination, base_url):
         date = re.search(r"^date:\s*(\S+)", note.read_text(), re.MULTILINE)
         if not date or date.group(1) != release["date"]:
             errors.append(f"Release date differs from audited Git tag: {release['version']}")
-    apk = destination / android["path"]
-    if not apk.is_file():
-        errors.append("Bundled Android APK missing")
-    else:
-        if apk.stat().st_size != android["size"] or hashlib.sha256(apk.read_bytes()).hexdigest() != android["sha256"]:
-            errors.append("Android APK size / SHA-256 mismatch")
-        if not zipfile.is_zipfile(apk):
-            errors.append("Android APK is not a ZIP package")
+    errors.extend(check_android_package(destination / android["path"], android))
+    android_url = config["params"]["downloads"].get("androidURL") or android["path"]
+    if not urlsplit(android_url).path.endswith(".zip"):
+        errors.append("Android download URL must end in .zip")
+    download = pages.get((destination / "download/index.html").resolve())
+    expected_url = urljoin(base_url, android_url)
+    if not download or [(urljoin(base_url, href), name) for href, name in download.downloads] != [(expected_url, android["file"])]:
+        errors.append("Android download button must target the configured ZIP with matching filename")
     sources = json.loads((destination / "img/screenshots/sources.json").read_text())
     for item in sources:
         screenshot = destination / "img/screenshots" / item["file"]
@@ -108,7 +146,7 @@ def check_site(destination, base_url):
     if errors:
         print("\n".join(errors), file=sys.stderr)
         return 1
-    print(f"PASS: {len(pages)} HTML pages; internal links, IDs, assets, carousel, original screenshots and APK hash ({base_path})")
+    print(f"PASS: {len(pages)} HTML pages; internal links, IDs, assets, carousel, original screenshots, ZIP and inner APK hashes ({base_path})")
     return 0
 
 

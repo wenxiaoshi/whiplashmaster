@@ -42,7 +42,7 @@ enableRobotsTXT = true
   carouselInterval = 3000
   tallyFormId = ""
 [params.downloads]
-  # Empty androidURL uses the bundled APK described by data/android.json.
+  # Empty androidURL uses the bundled ZIP described by data/android.json.
   androidURL = ""
   # Public TestFlight invitation supplied by the owner.
   iosURL = "https://testflight.apple.com/join/GvJkTs9D"

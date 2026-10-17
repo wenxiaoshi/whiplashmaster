@@ -5,11 +5,11 @@
   <div class="download-top"><div><p class="eyebrow">READY WHEN YOU ARE</p><h1>下一次进步，<br>从这一拍开始。</h1></div><p>选择你的设备。<br>把 Whiplash Master 带进日常练习。</p></div>
   <div class="download-grid">
     <article class="download-card">
-      <div class="platform-row"><h2>Android</h2><span class="platform-type">APK 直装</span></div>
-      <p>下载安装包，在 Android 设备上直接安装。</p>
+      <div class="platform-row"><h2>Android</h2><span class="platform-type">ZIP 压缩包</span></div>
+      <p>下载 ZIP 压缩包，解压后在 Android 设备上安装 APK。</p>
       <a class="btn" href="{{ $androidURL | strings.TrimPrefix "/" | relURL }}" download="{{ $android.file }}">下载 Android 版 <span aria-hidden="true">↗</span></a>
       <p class="download-note">{{ $android.version }} · {{ $android.minimumAndroid }} 及以上 · {{ printf "%.1f" (div (float $android.size) 1048576) }} MB</p>
-      <details class="install-details"><summary>安装说明</summary><ol><li>用手机浏览器下载安装包。</li><li>打开 APK，按系统提示允许该来源安装。</li><li>启动 App，按需授予麦克风权限。</li></ol></details>
+      <details class="install-details"><summary>安装说明</summary><ol><li>用手机浏览器下载 ZIP 压缩包。</li><li>在文件管理器中解压 ZIP，找到其中的 APK 安装包。</li><li>打开 APK，按系统提示允许该来源安装。</li><li>启动 App，按需授予麦克风权限。</li></ol></details>
     </article>
     <article class="download-card">
       <div class="platform-row"><h2>iOS</h2><span class="platform-type">TestFlight</span></div>
