@@ -1,6 +1,6 @@
 {
   "recordedAt": "2026-10-17T13:19:11.592770+00:00",
-  "status": "LOCAL_READY_NOT_PUSHED",
+  "status": "AUTHORIZED_FOR_PUBLICATION_LOCAL_VERIFIED",
   "branch": "release/2.2.0",
   "repository": "https://github.com/wenxiaoshi/whiplashmaster.git",
   "liveWebsite": "https://wenxiaoshi.github.io/whiplashmaster/",
@@ -21,7 +21,9 @@
     "failures": 0
   },
   "siteCheck": "PASS_29_HTML_pages_links_assets_APK_SHA256",
-  "published": "NO_pending_upstream_release_gates",
+  "published": "PENDING_PR_AND_PAGES",
   "testflightInvite": "https://testflight.apple.com/join/GvJkTs9D",
-  "iosNewBuildAvailability": "NOT_UPLOADED_NOT_CONFIRMED"
+  "iosNewBuildAvailability": "NOT_UPLOADED_NOT_CONFIRMED",
+  "userReleaseWaiver": "Explicit one-time reply in current chat; Figma/audio/device pending evidence retained",
+  "appMasterCommit": "a240d744f7fa9e30f91ddbe5b6e76d577acae7cf"
 }
