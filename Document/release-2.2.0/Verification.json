@@ -1,0 +1,27 @@
+{
+  "recordedAt": "2026-10-17T13:19:11.592770+00:00",
+  "status": "LOCAL_READY_NOT_PUSHED",
+  "branch": "release/2.2.0",
+  "repository": "https://github.com/wenxiaoshi/whiplashmaster.git",
+  "liveWebsite": "https://wenxiaoshi.github.io/whiplashmaster/",
+  "android": {
+    "version": "v2.2.0",
+    "versionCode": 17,
+    "date": "2026-10-17",
+    "file": "WhiplashMaster-v2.2.0-KMM-release.apk",
+    "path": "downloads/WhiplashMaster-v2.2.0-KMM-release.apk",
+    "size": 32993535,
+    "minSdk": 29,
+    "minimumAndroid": "Android 10",
+    "sha256": "19b430bd05437ec9defda79cc9ef7d0dc1bfa8acfee3ce1d51e1dcae8798aee4"
+  },
+  "hugo": "PASS",
+  "nodeTests": {
+    "tests": 11,
+    "failures": 0
+  },
+  "siteCheck": "PASS_29_HTML_pages_links_assets_APK_SHA256",
+  "published": "NO_pending_upstream_release_gates",
+  "testflightInvite": "https://testflight.apple.com/join/GvJkTs9D",
+  "iosNewBuildAvailability": "NOT_UPLOADED_NOT_CONFIRMED"
+}

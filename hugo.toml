@@ -37,8 +37,8 @@ enableRobotsTXT = true
   description = "Whiplash Master 鼓手 App：评分练习、节拍陪伴、自由演奏与练习记录。"
   author = "Wenshy"
   brandColor = "#F0443B"
-  latestVersion = "v2.1.0"
-  latestVersionDate = "2026-07-30"
+  latestVersion = "v2.2.0"
+  latestVersionDate = "2026-10-17"
   carouselInterval = 3000
   tallyFormId = ""
 [params.downloads]
