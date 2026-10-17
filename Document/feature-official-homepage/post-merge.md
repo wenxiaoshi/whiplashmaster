@@ -28,3 +28,11 @@ Spec、Plan、review、README 及 GitHub Pages 发布清单已同步最新用户
 11 项轮播测试和 JS 语法检查通过；根路径与 GitHub Pages 子路径的 28 个 HTML 页面、内部链接、资源、APK 及截图哈希检查通过；工作流 YAML、差异格式检查通过。浏览器已确认 RSS 入口消失及 iOS 申请内测入口有效呈现。截图见 `evidence/rss-removed.jpg`。
 
 后续需确认官网专用 GitHub 仓库地址，配置 Pages 为 GitHub Actions，再推送 `master`。TestFlight 邀请链接等待维护者补充，不阻塞 Android 官网发布。操作步骤见 `github-release.md`。
+
+## GitHub 发布跟进 · 2026-10-17
+
+维护者指定 `wenxiaoshi/whiplashmaster`，并明确确认将其从 Private 改为 Public 后继续发布。本地 `origin` 和 Hugo `baseURL` 已对齐，实际 `/whiplashmaster/` 子路径构建的 28 个 HTML 页面检查通过。配置提交 `12e8b5f`、`441207e` 已快进合并至 `master` 并推送；远端默认分支已设为 `master`，原 `main` 初始化提交保留。
+
+Pages 已启用 GitHub Actions。首轮 run `38984894837` 的云端测试、构建与资源完整性检查全部通过，部署被旧 `main` 环境分支策略阻止；已将该策略同步为仅允许 `master`，并重新运行失败任务。技术经验已加入 `github-release.md`，不修改全局 Memory 或 App 工程治理资产。
+
+修正后构建、部署均成功，官网已在 `https://wenxiaoshi.github.io/whiplashmaster/` 上线。线上浏览器验收通过：共享样式和四张真实截图全部加载，版本记录没有 RSS，下载页面提供 Android APK 和待补充 TestFlight 的申请内测入口。发布证据见 `evidence/published-home.jpg` 和 `evidence/pages-actions.jpg`。
