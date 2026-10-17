@@ -41,5 +41,5 @@ WhiplashMaster 起源于一位业余鼓手兼独立开发者的日常烦恼 — 
 ## 联系与反馈
 
 - **反馈表单** · [/feedback/](/feedback/) — 1 分钟提交，不用登录
-- **小红书** · [@Wenshy](https://www.xiaohongshu.com/user/profile/67652a88000000001403254d) — 评论 / 私信
+- **小红书** · [扫码联系](/feedback/#xiaohongshu) — 评论 / 私信
 - **微信** · 反馈页有二维码 — 紧急问题 & TestFlight 邀请

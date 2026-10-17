@@ -2,7 +2,7 @@
 <section class="article wrap narrow">
   <div class="article-heading"><p class="eyebrow">FEEDBACK</p><h1>联系与反馈</h1><p>反馈时请附上 App 版本、设备型号和问题描述。</p></div>
   <div class="contact-grid">
-    <article class="contact-card"><h2>小红书</h2><p>通过评论或私信反馈使用体验。</p><a class="text-link" href="{{ site.Params.xiaohongshu }}" target="_blank" rel="noopener noreferrer">打开小红书 ↗</a></article>
+    <article class="contact-card" id="xiaohongshu"><h2>小红书</h2><p>使用小红书扫码，或保存图片后识别。</p><a href="{{ "assets/xiaohongshu-qr.jpg" | strings.TrimPrefix "/" | relURL }}" target="_blank" rel="noopener noreferrer" aria-label="查看小红书二维码原图"><img src="{{ "assets/xiaohongshu-qr.jpg" | strings.TrimPrefix "/" | relURL }}" width="260" height="355" alt="小红书联系二维码，账号 momo，小红书号 26291801740" loading="lazy"></a></article>
     <article class="contact-card" id="wechat"><h2>微信</h2><p>扫码添加，备注「WhiplashMaster」。</p><img src="{{ "assets/wechat-qr.jpg" | strings.TrimPrefix "/" | relURL }}" width="220" height="220" alt="Wenshy 微信联系二维码" loading="lazy"></article>
   </div>
 </section>

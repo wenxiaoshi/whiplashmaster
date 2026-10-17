@@ -40,7 +40,6 @@ enableRobotsTXT = true
   latestVersion = "v2.1.0"
   latestVersionDate = "2026-07-30"
   carouselInterval = 3000
-  xiaohongshu = "https://www.xiaohongshu.com/user/profile/67652a88000000001403254d"
   tallyFormId = ""
 [params.downloads]
   # Empty androidURL uses the bundled APK described by data/android.json.
